@@ -10,8 +10,17 @@ permissions:
 
 jobs:
   binaries:
-    name: build binaries
+    name: build ${{ matrix.target }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - x86_64-unknown-linux-musl
+          - aarch64-unknown-linux-musl
+          - x86_64-apple-darwin
+          - aarch64-apple-darwin
+          - x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@v4
 
@@ -19,12 +28,7 @@ jobs:
         uses: taiki-e/upload-rust-binary-action@v1
         with:
           bin: moltdisk
-          target: >-
-            x86_64-unknown-linux-musl,
-            aarch64-unknown-linux-musl,
-            x86_64-apple-darwin,
-            aarch64-apple-darwin,
-            x86_64-pc-windows-msvc
+          target: ${{ matrix.target }}
           archive: moltdisk-$tag-$target
           include: README.md,LICENSE
           checksum: sha256
