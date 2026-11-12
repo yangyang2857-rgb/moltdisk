@@ -1,0 +1,26 @@
+[package]
+name = "moltdisk"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.80"
+description = "蜕冗 / moltdisk — audit your dev bulk: find build artifacts that can be rebuilt from source and show the evidence, without ever deleting"
+authors = ["Wang Sunyang <yangyang2857-rgb@users.noreply.github.com>"]
+license = "MIT"
+repository = "https://github.com/yangyang2857-rgb/moltdisk"
+homepage = "https://github.com/yangyang2857-rgb/moltdisk"
+documentation = "https://github.com/yangyang2857-rgb/moltdisk#readme"
+keywords = ["cli", "disk-space", "audit", "node-modules", "developer-tools"]
+categories = ["command-line-utilities", "development-tools"]
+exclude = [".github/", "demo/"]
+
+[dependencies]
+rayon = "1.10"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 1

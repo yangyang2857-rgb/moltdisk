@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="444" viewBox="0 0 880 444" role="img" aria-label="moltdisk audit output in a terminal">
+<defs><style><![CDATA[text{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;font-size:13px;white-space:pre}.cmd{fill:#e6edf3}.headline{fill:#e6edf3;font-weight:600}.path{fill:#a5d6ff}.muted{fill:#8b949e}.sum{fill:#8b949e}.hint{fill:#6e7681}.thead{fill:#8b949e;font-size:11.5px;letter-spacing:.08em}.size{fill:#e6edf3;font-weight:600}.kind{font-weight:500}]]></style></defs>
+<rect width="880" height="444" rx="12" fill="#0d1117"/>
+<rect x="0.5" y="0.5" width="879" height="443" rx="12" fill="none" stroke="#30363d"/>
+<path d="M0 34 h880" stroke="#21262d"/>
+<circle cx="22" cy="17" r="5.5" fill="#ff5f56" opacity="0.9"/>
+<circle cx="39" cy="17" r="5.5" fill="#ffbd2e" opacity="0.9"/>
+<circle cx="56" cy="17" r="5.5" fill="#27c93f" opacity="0.9"/>
+<text x="440.0" y="21" text-anchor="middle" fill="#8b949e" font-size="12">moltdisk · 蜕冗 — ~/code</text>
+<text class="cmd" x="26" y="60">$ moltdisk ~/code</text>
+<text class="headline" x="26" y="104" font-weight="600">1.84 GB of build output can be rebuilt from source.</text>
+<text class="size" x="65.0" y="148">1.21 GB</text>
+<text class="kind" x="135.2" y="148" fill="#7ee787">node</text>
+<text class="path" x="213.2" y="148">         ~/code/web-shop/node_modules</text>
+<text class="size" x="65.0" y="170"> 512 MB</text>
+<text class="kind" x="135.2" y="170" fill="#ffa657">rust</text>
+<text class="path" x="213.2" y="170">         ~/code/rusty/target</text>
+<text class="size" x="65.0" y="192">  96 MB</text>
+<text class="kind" x="135.2" y="192" fill="#79c0ff">python</text>
+<text class="path" x="213.2" y="192">       ~/code/api/.venv</text>
+<text class="thead" x="26" y="236">      SIZE KIND       FILES  IDLE       PATH</text>
+<text class="size" x="49.4" y="258">1.21 GB</text>
+<text class="kind" x="119.6" y="258" fill="#7ee787">node</text>
+<text class="path" x="197.6" y="258">       48k  3 months   ~/code/web-shop/node_modules</text>
+<text class="size" x="49.4" y="280"> 512 MB</text>
+<text class="kind" x="119.6" y="280" fill="#ffa657">rust</text>
+<text class="path" x="197.6" y="280">        9k  12 days    ~/code/rusty/target</text>
+<text class="size" x="49.4" y="302">  96 MB</text>
+<text class="kind" x="119.6" y="302" fill="#79c0ff">python</text>
+<text class="path" x="197.6" y="302">      2k  5 months   ~/code/api/.venv</text>
+<text class="sum" x="26" y="346">7 targets  ·  1.84 GB  ·  63.9k files</text>
+<text class="sum" x="26" y="368">by kind: node 1.21 GB  ·  rust 512 MB  ·  python 96 MB</text>
+<text class="hint" x="26" y="412">`moltdisk why &lt;path&gt;` shows the evidence. This build never deletes.</text>
+</svg>
