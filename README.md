@@ -56,7 +56,7 @@ There is no `delete` module, no `remove_dir_all` call, and `-y` is a hard error:
 
 ```
 $ moltdisk -y
-moltdisk: this build never deletes — `-y` was removed in 0.2.0 (see `moltdisk --help`)
+moltdisk: this build never deletes — `-y` was removed in 0.1.0 (see `moltdisk --help`)
 ```
 
 You do not have to take that on faith:
@@ -155,7 +155,7 @@ moltdisk --json ~/code | jq '.targets[] | select(.size > 1e9) | .path'
 ```json
 {
   "tool": "moltdisk",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "total_size": 1975684956,
   "total_files": 63913,
   "roots": ["/home/you/code"],
@@ -178,10 +178,9 @@ moltdisk --json ~/code | jq '.targets[] | select(.size > 1e9) | .path'
 
 ## History
 
-- **v0.1.0** — the deleting build. Interactive picker, `clean -y`, guard rails.
-  Archived at tag `v0.1.0`, not maintained.
-- **v0.2.0** — auditing build. Deletion code removed entirely; `moltdisk why` added;
-  conclusion-first output; rulebook gained a `rebuild` line per kind.
+- **v0.1.0** — first public release. Auditing build: deletion code absent by
+  construction, `moltdisk why` added, conclusion-first output, rulebook gained a
+  `rebuild` line per kind.
 
 ## License
 

@@ -60,7 +60,7 @@ Options
   -h, --help             This text
   -V, --version          Print version
 
-Removed in 0.2.0
+Removed in 0.1.0
   -y, --yes, --dry-run, clean
                          This build cannot delete, so the deleting flags and the
                          `clean` command were removed. `clean` still answers, and
@@ -116,7 +116,7 @@ pub fn parse<I: IntoIterator<Item = String>>(args: I) -> Result<Cli, String> {
             }
             "-y" | "--yes" | "--delete" => {
                 return Err(
-                    "this build never deletes — `-y` was removed in 0.2.0 (see `moltdisk --help`)"
+                    "this build never deletes — `-y` was removed in 0.1.0 (see `moltdisk --help`)"
                         .into(),
                 );
             }
