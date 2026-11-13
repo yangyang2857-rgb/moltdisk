@@ -1,5 +1,10 @@
 # moltdisk · 蜕冗
 
+[![CI](https://github.com/yangyang2857-rgb/moltdisk/actions/workflows/ci.yml/badge.svg)](https://github.com/yangyang2857-rgb/moltdisk/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/yangyang2857-rgb/moltdisk?sort=semver)](https://github.com/yangyang2857-rgb/moltdisk/releases)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![MSRV](https://img.shields.io/badge/MSRV-1.80-orange.svg)](Cargo.toml)
+
 **蜕冗** — 蜕去冗余。Shed your dev bulk by finding it, not by deleting it.
 
 `moltdisk` 只做一件事：告诉你哪些构建产物是可以从源码重建的，以及凭什么这么判断。它不删任何东西。
@@ -10,19 +15,11 @@ they occupy, ranks them, and explains *why* it believes each one is disposable.
 
 Then it stops. This build has no delete code path.
 
+![moltdisk audit output in a terminal](assets/demo.svg)
+
 ```
 $ moltdisk ~/code
 1.84 GB of build output can be rebuilt from source.
-
-  1. 1.21 GB  node       ~/code/web-shop/node_modules
-  2.  512 MB  rust       ~/code/rusty/target
-  3.   96 MB  python     ~/code/api/.venv
-  … 4 targets more below
-
-       SIZE KIND         FILES  IDLE       PATH
-   1.21 GB node          48.2k  3 months   ~/code/web-shop/node_modules
-    512 MB rust           9.1k  12 days    ~/code/rusty/target
-     96 MB python         2.4k  5 months   ~/code/api/.venv
 
 7 targets  ·  1.84 GB  ·  63.9k files
 by kind: node 1.21 GB  ·  rust 512 MB  ·  python 96 MB
@@ -38,16 +35,18 @@ by kind: node 1.21 GB  ·  rust 512 MB  ·  python 96 MB
 
 ## Why an auditor and not a deleter
 
-`moltdisk` v0.1 could delete. It had guard rails: a directory only counted as build
-output when its *name and a sibling marker* both matched (`target/` needed a
-`Cargo.toml` beside it, `vendor/` a `composer.json`, `Pods/` a `Podfile`), and it
-refused symlinks, the home directory, and anything outside the given roots.
+An early internal build of `moltdisk` could delete. It had guard rails: a directory
+only counted as build output when its *name and a sibling marker* both matched
+(`target/` needed a `Cargo.toml` beside it, `vendor/` a `composer.json`, `Pods/` a
+`Podfile`), and it refused symlinks, the home directory, and anything outside the
+given roots.
 
 Those guards were good and they were not enough. A tool that deletes other people's
 build directories from a heuristic is a tool that will one day delete the wrong
 thing, and the person holding the keyboard will not be the person who wrote the
-heuristic. So v0.2 removed the deleting. What is left is the part that was always
-the interesting part: the judgement, shown in the open.
+heuristic. So the deleting was removed before this project was ever published. What
+is left is the part that was always the interesting part: the judgement, shown in
+the open.
 
 If you want the deletions, do them yourself, with the list `moltdisk` hands you. You
 know your projects. `moltdisk` only knows its rulebook.
@@ -69,8 +68,21 @@ strings target/release/moltdisk | grep -c remove_dir_all   # 0
 
 ## Install
 
+Prebuilt binaries are attached to [each release](https://github.com/yangyang2857-rgb/moltdisk/releases):
+Linux x86_64 / aarch64 (static musl), macOS Intel / Apple Silicon, Windows x86_64.
+Each archive is paired with a `.sha256`.
+
 ```bash
-cargo install --path .           # or: cargo build --release
+TAG=v0.1.0
+curl -LO https://github.com/yangyang2857-rgb/moltdisk/releases/download/$TAG/moltdisk-$TAG-x86_64-unknown-linux-musl.tar.gz
+sha256sum -c moltdisk-$TAG-x86_64-unknown-linux-musl.sha256
+tar xzf moltdisk-$TAG-x86_64-unknown-linux-musl.tar.gz
+```
+
+Or from source:
+
+```bash
+cargo install --git https://github.com/yangyang2857-rgb/moltdisk
 ```
 
 MSRV is 1.80. One dependency (`rayon`), no `unsafe`.
