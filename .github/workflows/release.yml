@@ -20,6 +20,27 @@ jobs:
           changelog: CHANGELOG.md
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # The changelog says what changed. It cannot say why the tool refuses to
+      # delete, and that is the first question a release page has to answer.
+      # Keep the answer in one file and prepend it, so the two never drift.
+      - name: Prepend the "why no delete" header
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          notes=$(gh release view "$TAG" --json body --jq .body)
+          if [[ "$notes" == *"moltdisk:release-header"* ]]; then
+            echo "header already present, leaving the body alone"
+            exit 0
+          fi
+          {
+            cat .github/release-header.md
+            printf '%s\n' "$notes"
+          } > "$RUNNER_TEMP/release-body.md"
+          gh release edit "$TAG" --notes-file "$RUNNER_TEMP/release-body.md"
+          echo "release body is $(wc -c < "$RUNNER_TEMP/release-body.md") bytes"
+
   binaries:
     name: build ${{ matrix.target }}
     needs: create-release
