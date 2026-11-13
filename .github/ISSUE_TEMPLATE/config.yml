@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "Not a bug? Read the rulebook first"
+    url: https://github.com/yangyang2857-rgb/moltdisk#the-rulebook
+    about: "`moltdisk kinds` explains why each kind counts as rebuildable, and which names stay opt-in."
+  - name: "Adding a rule, or a way for a rule to be wrong"
+    url: https://github.com/yangyang2857-rgb/moltdisk/blob/main/CONTRIBUTING.md
+    about: "A missing artefact is usually a three-line change to RULES in src/kinds.rs."

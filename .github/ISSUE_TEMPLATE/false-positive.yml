@@ -1,0 +1,129 @@
+name: False positive
+description: moltdisk flagged a directory that cannot actually be rebuilt from source.
+title: "[false positive] "
+labels: ["false-positive"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A wrong verdict is the only bug that really matters here, because a report gets copy-pasted into `rm`.
+
+        Run `moltdisk why <path>` before filing: it prints the verdict, the marker it looked for, and what it found.
+        If the marker was missing entirely, that is usually a rule bug rather than a false positive, but it is still
+        the right form to use.
+
+  - type: textarea
+    id: path
+    attributes:
+      label: The path that was matched
+      description: Absolute path, exactly as it appeared in the report.
+      placeholder: /home/me/code/web-shop/dist
+      render: shell
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What moltdisk claimed it was
+      description: The kind from the report, or from the `verdict` line of `moltdisk why`.
+      options:
+        - node
+        - rust
+        - jvm
+        - python
+        - dotnet
+        - php
+        - swift
+        - apple
+        - cache
+        - junk
+        - not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-output
+    attributes:
+      label: Output of `moltdisk why <path>`
+      description: Paste it whole — the marker it looked for and the marker it found are the two halves that explain the verdict.
+      render: shell
+      placeholder: |
+        $ moltdisk why /home/me/code/web-shop/dist
+        /home/me/code/web-shop/dist
+
+          verdict   ...
+          reason    ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: siblings
+    attributes:
+      label: What is actually there
+      description: >-
+        The marker lives in the parent, so `ls -a <path>` and `ls -a <parent>` both matter. If the directory holds
+        source or hand-written files rather than generated output, say so — that is the interesting part.
+      render: shell
+      placeholder: |
+        $ ls -a /home/me/code/web-shop/dist
+        .  ..  index.html  app.js  assets/
+        $ ls -a /home/me/code/web-shop
+        .  ..  package.json  src/  dist/
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-not
+    attributes:
+      label: Why it cannot be rebuilt
+      description: What would be lost, and what it would take to get it back. "It would take 20 minutes and a network round trip" is a fine answer — the point is that the tool got the judgement wrong, not that the rebuild is cheap.
+      placeholder: |
+        `dist/` is committed with hand-edited `app.js`; `npm run build` overwrites it and the edits are gone.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: moltdisk version
+      description: "`moltdisk --version`"
+      placeholder: moltdisk 0.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Linux x86_64
+        - Linux aarch64
+        - macOS Intel
+        - macOS Apple Silicon
+        - Windows x86_64
+        - built from source
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before submitting
+      options:
+        - label: I included the full `moltdisk why <path>` output, not just the summary line.
+          required: true
+        - label: I checked what is in the directory itself, not only its name.
+          required: true
+        - label: I searched existing issues for the same name or path pattern.
+          required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: >-
+        A smaller fixture that reproduces it is the most useful thing you can attach — `tests/cli.rs` builds its
+        fixtures from scratch, so a reproduction is about ten lines. Screenshots of a terminal are welcome too.
+    validations:
+      required: false

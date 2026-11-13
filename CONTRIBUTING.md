@@ -37,14 +37,17 @@ Then answer these questions in the pull request:
 
 ## Reporting a false positive
 
-A false positive is the only kind of bug that matters here. Open an issue with:
-
-- the path that was matched,
-- the sibling files in its parent directory,
-- what `moltdisk` printed.
+A false positive is the only kind of bug that matters here: a report gets
+copy-pasted into `rm`, so a wrong verdict is not a cosmetic defect. Use the
+[false-positive form](https://github.com/yangyang2857-rgb/moltdisk/issues/new?template=false-positive.yml),
+which asks for the three things such a report needs — the path that was matched,
+the sibling files in its parent directory, and what `moltdisk why <path>` printed.
+The form is the contract; if a field in it turns out to be useless for triage,
+that is a bug in the form and worth a pull request.
 
 If you can, add a failing test to `tests/cli.rs` first. That file builds its
-fixtures from scratch, so a reproduction is about ten lines.
+fixtures from scratch, so a reproduction is about ten lines, and the fixture
+doubles as the specification for the fix.
 
 ## Style
 
