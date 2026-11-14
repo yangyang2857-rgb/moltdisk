@@ -1,15 +1,18 @@
 # moltdisk · 蜕冗
 
+**English** · [简体中文](README.zh-CN.md)
+
 [![CI](https://github.com/yangyang2857-rgb/moltdisk/actions/workflows/ci.yml/badge.svg)](https://github.com/yangyang2857-rgb/moltdisk/actions/workflows/ci.yml)
 [![release](https://img.shields.io/github/v/release/yangyang2857-rgb/moltdisk?sort=semver)](https://github.com/yangyang2857-rgb/moltdisk/releases)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![MSRV](https://img.shields.io/badge/MSRV-1.80-orange.svg)](Cargo.toml)
 
-**蜕冗** — 蜕去冗余。Shed your dev bulk by finding it, not by deleting it.
+**蜕冗** — shed the redundant. Find your dev bulk, do not delete it blindly.
 
-`moltdisk` 只做一件事：告诉你哪些构建产物是可以从源码重建的，以及凭什么这么判断。它不删任何东西。
+`moltdisk` does exactly one thing: it tells you which build output can be rebuilt from
+source, and what the evidence for that claim is. It deletes nothing.
 
-`moltdisk` walks your projects and finds build output that can be rebuilt from source:
+It walks your projects and finds build output that can be rebuilt from source:
 `node_modules`, `target`, `dist`, `venv`, `Pods`, caches. It measures how much disk
 they occupy, ranks them, and explains *why* it believes each one is disposable.
 
@@ -27,11 +30,14 @@ by kind: node 1.21 GB  ·  rust 512 MB  ·  python 96 MB
 `moltdisk why <path>` shows the evidence for any entry. This build never deletes — that call is yours.
 ```
 
-## 名字
+## The name
 
-`molt` 是爬行动物蜕去旧壳的动作，`蜕冗` 是蜕去冗余，`disk` 是要蜕的那层壳。
-构建产物本来就是这样一层壳：每年重生成几十次，删掉一次都不该心疼。
-工具的职责是告诉你哪一层壳是可以蜕的，以及凭什么——壳要不要蜕，是人决定的。
+`molt` is what a reptile does when it sheds its old shell. 蜕冗 (tuì rǒng) is "shedding
+the redundant". `disk` is the shell being shed.
+
+Build output is exactly that kind of shell: regenerated dozens of times a year, never
+worth mourning over a single deletion. The job of the tool is to tell you which shell
+can be shed and on what grounds — whether to shed it is a decision for a human.
 
 ## Why an auditor and not a deleter
 
